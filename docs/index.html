@@ -12,6 +12,7 @@
 			--paper: #f7f5ef;
 			--accent: #ef7657;
 			--line: #d9e0df;
+			--card: #ffffff;
 		}
 
 		* { box-sizing: border-box; }
@@ -35,6 +36,10 @@
 			justify-content: space-between;
 			padding: 28px 0;
 			border-bottom: 1px solid var(--line);
+			position: sticky;
+			top: 0;
+			background: var(--paper);
+			z-index: 10;
 		}
 
 		.logo {
@@ -55,7 +60,7 @@
 			grid-template-columns: 1.2fr .8fr;
 			align-items: center;
 			gap: 64px;
-			min-height: 500px;
+			min-height: 480px;
 			padding: 72px 0;
 		}
 
@@ -106,11 +111,117 @@
 
 		.orb span { transform: rotate(8deg); }
 
+		section.block {
+			padding: 64px 0;
+			border-top: 1px solid var(--line);
+		}
+
+		.block-head { margin-bottom: 36px; }
+
+		.block-head .eyebrow { display: block; margin-bottom: 8px; }
+
+		h2 {
+			margin: 0;
+			font-family: Georgia, serif;
+			font-size: clamp(2.2rem, 5vw, 3rem);
+			letter-spacing: -.02em;
+		}
+
+		/* About */
+		.about-grid {
+			display: grid;
+			grid-template-columns: .8fr 1.2fr;
+			gap: 48px;
+			align-items: start;
+		}
+
+		.profile-card {
+			padding: 28px;
+			background: var(--card);
+			border: 1px solid var(--line);
+		}
+
+		.profile-name {
+			font-family: Georgia, serif;
+			font-size: 1.6rem;
+			margin: 0 0 2px;
+		}
+
+		.profile-handle { color: var(--accent); font-size: .9rem; margin: 0 0 18px; }
+
+		.profile-facts { list-style: none; margin: 0 0 20px; padding: 0; font-size: .88rem; }
+		.profile-facts li {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 9px 0;
+			border-top: 1px solid var(--line);
+			color: var(--muted);
+		}
+		.profile-facts li span:last-child { color: var(--ink); text-align: right; }
+
+		.social-links { display: flex; flex-direction: column; gap: 8px; }
+		.social-links a {
+			font-size: .88rem;
+			color: var(--ink);
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		.social-links a:hover { color: var(--accent); }
+		.social-links a::before { content: "→"; color: var(--accent); }
+
+		.about-text p { margin: 0 0 18px; color: var(--ink); }
+		.about-text p:last-child { margin-bottom: 0; }
+
+		.aside-note {
+			margin-top: 22px;
+			padding: 14px 16px;
+			border-left: 3px solid var(--accent);
+			background: #efebe2;
+			color: var(--muted);
+			font-size: .88rem;
+		}
+
+		/* Works */
+		.work-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 24px;
+		}
+
+		.work-card {
+			display: block;
+			padding: 28px;
+			background: var(--card);
+			border: 1px solid var(--line);
+			color: var(--ink);
+			text-decoration: none;
+			transition: .2s ease;
+		}
+
+		.work-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+		.work-tag {
+			display: inline-block;
+			margin-bottom: 14px;
+			padding: 3px 10px;
+			border: 1px solid var(--accent);
+			color: var(--accent);
+			font-size: .72rem;
+			letter-spacing: .06em;
+		}
+
+		.work-card strong { display: block; margin-bottom: 8px; font-family: Georgia, serif; font-size: 1.4rem; }
+		.work-card p { margin: 0 0 14px; color: var(--muted); font-size: .92rem; }
+		.work-card small { color: var(--ink); font-weight: bold; }
+
+		/* Contact / footer links */
 		.links {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			gap: 16px;
-			padding: 32px 0 72px;
 		}
 
 		.link-card {
@@ -130,9 +241,12 @@
 			.page { width: min(100% - 28px, 540px); }
 			header { padding: 20px 0; }
 			nav { gap: 12px; }
-			.hero { grid-template-columns: 1fr; gap: 28px; min-height: auto; padding: 72px 0 48px; }
+			.hero { grid-template-columns: 1fr; gap: 28px; min-height: auto; padding: 56px 0 40px; }
 			.orb { width: 190px; margin: 0 12px 0 auto; font-size: 2.5rem; }
-			.links { grid-template-columns: 1fr; padding-bottom: 48px; }
+			.about-grid { grid-template-columns: 1fr; gap: 28px; }
+			.work-grid { grid-template-columns: 1fr; }
+			.links { grid-template-columns: 1fr; }
+			section.block { padding: 48px 0; }
 		}
 	</style>
 </head>
@@ -142,27 +256,79 @@
 			<a class="logo" href="index.html">HOME</a>
 			<nav aria-label="メインメニュー">
 				<a href="#about">About</a>
-				<a href="#links">Links</a>
+				<a href="#works">Works</a>
+				<a href="#links">Contact</a>
 			</nav>
 		</header>
 
 		<main>
-			<section class="hero" id="about">
+			<section class="hero">
 				<div>
 					<span class="eyebrow">WELCOME TO MY SPACE</span>
 					<h1>ここが、<br>HOME。</h1>
 					<p class="lead">日々のこと、つくったもの、好きなもの。ここから、ゆっくり紹介していきます。</p>
-					<a class="button" href="#links">リンクを見る →</a>
+					<a class="button" href="#works">作品を見る →</a>
 				</div>
 				<div class="orb" aria-hidden="true"><span>hello.</span></div>
 			</section>
 
-			<section class="links" id="links" aria-label="リンク一覧">
-				<a class="link-card" href="#">
+			<section class="block" id="about" aria-label="About me">
+				<div class="block-head">
+					<span class="eyebrow">ABOUT ME</span>
+					<h2>わたしについて</h2>
+				</div>
+				<div class="about-grid">
+					<div class="profile-card">
+						<p class="profile-name">ほこり</p>
+						<p class="profile-handle">@hokorinohoko</p>
+						<ul class="profile-facts">
+							<li><span>誕生日</span><span>5月29日</span></li>
+							<li><span>活動</span><span>プログラミング</span></li>
+							<li><span>実績</span><span>ジュニアのコード部門 県2位</span></li>
+							<li><span>よくいる場所</span><span>VRChat</span></li>
+							<li><span>きのこ vs たけのこ</span><span>きのこ派</span></li>
+						</ul>
+						<div class="social-links">
+							<a href="https://t.co/mx90WZhwfs" target="_blank" rel="noopener">VRChat</a>
+							<a href="https://x.com/hokorinokotyann" target="_blank" rel="noopener">X (Twitter)</a>
+							<a href="https://github.com/hokorinihoko" target="_blank" rel="noopener">GitHub</a>
+						</div>
+					</div>
+					<div class="about-text">
+						<p>プログラミングを一応やっています。ジュニアのコード部門では県2位まで行きました。ふだんはVRChatに引きこもりがちです。</p>
+						<p>Unityの気まぐれな挙動には毎回振り回されています。Blenderにも挑戦してみましたが、ショートカットを覚えるのがつらすぎて一度挫折しました。</p>
+						<div class="aside-note">Xって何ですか?Twitterではなくて?</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="block" id="works" aria-label="Works">
+				<div class="block-head">
+					<span class="eyebrow">WORKS</span>
+					<h2>つくったもの</h2>
+				</div>
+				<div class="work-grid">
+					<a class="work-card" href="https://hokorinihoko.github.io/aburaage.jumpgame/" target="_blank" rel="noopener">
+						<span class="work-tag">代表作</span>
+						<strong>あぶらあげジャンプゲーム</strong>
+						<p>ブラウザで遊べるジャンプアクションゲーム。</p>
+						<small>遊ぶ →</small>
+					</a>
+					<a class="work-card" href="https://hokorinihoko.github.io/Tic-Tac-Toe/" target="_blank" rel="noopener">
+						<span class="work-tag">第二代表作</span>
+						<strong>Tic-Tac-Toe</strong>
+						<p>定番の三目並べをブラウザで実装。</p>
+						<small>遊ぶ →</small>
+					</a>
+				</div>
+			</section>
+
+			<section class="block links" id="links" aria-label="リンク一覧">
+				<a class="link-card" href="#about">
 					<strong>About me</strong>
 					<small>わたしについて →</small>
 				</a>
-				<a class="link-card" href="#">
+				<a class="link-card" href="#works">
 					<strong>Works</strong>
 					<small>つくったもの →</small>
 				</a>
